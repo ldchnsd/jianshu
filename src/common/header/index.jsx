@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { actionCreators } from './store/index'
 import { CSSTransition } from "react-transition-group";
@@ -19,7 +19,7 @@ import {
 
 
 
-class Header extends Component {
+class Header extends PureComponent {
 
   getListArea = () => {
 

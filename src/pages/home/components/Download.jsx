@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { DownloadApp, DownloadInfo, AppCode } from '../style'
 import { actionCreators } from '../store/index'
 import { CSSTransition } from "react-transition-group";
 
 
-class Download extends Component {
+class Download extends PureComponent {
     handleApp = (mouseIn) => {
         if (mouseIn) {
             return (

@@ -17,21 +17,32 @@ const defaultState = fromJS({
         }
     ],
     mouseIn: false,
+    articlePage: 1,
+    backtotop: false,
 })
 
 const reducer = (state = defaultState, action) => {
-    const { type } = action
-    switch (type) {
+
+    switch (action.type) {
         case actionTypes.MOUSE_ENTER:
             return state.set('mouseIn', true)
         case actionTypes.MOUSE_LEAVE:
             return state.set('mouseIn', false)
-        case 'home_list':
+        case actionTypes.HOME_LIST:
             return state.merge({
                 topicList: fromJS(action.topicList),
                 articleList: fromJS(action.articleList),
                 recommendList: fromJS(action.recommendList)
             })
+        case actionTypes.LOAD_MORE:
+            return state.merge({
+                articleList: [...state.get('articleList'), ...action.list],
+                articlePage: action.nextPage
+            })
+
+        case actionTypes.TOGGLE_SCROLL:
+            return state.set('backtotop', action.show)
+
         default:
             return state;
     }

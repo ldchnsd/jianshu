@@ -1,3 +1,5 @@
 export const MOUSE_ENTER = 'home/mouse_enter'
-
 export const MOUSE_LEAVE = 'home/mouse_leave'
+export const HOME_LIST = 'home/home_list'
+export const LOAD_MORE = 'home/LOAD_MORE'
+export const TOGGLE_SCROLL = 'home/TOGGLE_SCROLL'

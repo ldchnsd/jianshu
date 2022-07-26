@@ -177,3 +177,24 @@ width:280px;
 
 }
 `
+export const LoadMore = styled.div`
+width:100%;
+height:40px;
+line-height:40px;
+margin:30px 0;
+text-align:center;
+background:#a5a5a5;
+color:#fff;
+border-radius:20px;
+`
+export const BackToTop = styled.div`
+width:60px;
+height:60px;
+line-height:60px;
+text-align:center;
+border:1px solid #ccc;
+position:fixed;
+right:100px;
+bottom:100px;
+font-size:14px;
+`

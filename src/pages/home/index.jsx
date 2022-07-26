@@ -1,28 +1,29 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
 import { HomeWrapper, HomeLeft, HomeRight } from './style'
 import List from './components/List'
 import Recommend from './components/Recommend'
 import Topic from './components/Topic'
 import Writer from './components/Writer'
 import Download from './components/Download'
+import { actionCreators } from './store/index'
+import { BackToTop } from './style'
 
-
-class Home extends Component {
+class Home extends PureComponent {
 
     componentDidMount() {
-        axios.get('/api/home.json').then((res) => {
-            const result = res.data.data
-            const action = {
-                type: 'home_list',
-                topicList: result.topicList,
-                articleList: result.articleList,
-                recommendList: result.recommendList
-            }
-            this.props.handleHomeList(action)
-        })
+        this.props.handleHomeList()
+        this.scrollEvent()
+
     }
+    scrollEvent = () => {
+        window.addEventListener('scroll', this.props.handleScrollTop)
+    }
+
+    handleBackTop() {
+        window.scrollTo(0, 0)
+    }
+
 
     render() {
         return (
@@ -37,15 +38,30 @@ class Home extends Component {
                     <Download />
                     <Writer />
                 </HomeRight>
+                {this.props.backtop ? <BackToTop onClick={() => { this.handleBackTop() }} >顶部</BackToTop> : null}
+
             </HomeWrapper>
         )
     }
 }
 
+
+const mapState = (state) => ({
+    backtop: state.getIn(['home', 'backtotop'])
+})
+
 const mapDispatch = (dispatch) => ({
-    handleHomeList: (action) => {
-        dispatch(action)
+    handleHomeList: () => {
+        dispatch(actionCreators.homeListAction())
+    },
+    handleScrollTop: () => {
+        if (document.documentElement.scrollTop > 100) {
+            dispatch(actionCreators.toggleScroll(true))
+        } else {
+            dispatch(actionCreators.toggleScroll(false))
+        }
+
     }
 })
 
-export default connect(null, mapDispatch)(Home)
+export default connect(mapState, mapDispatch)(Home)
