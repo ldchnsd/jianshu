@@ -9,6 +9,7 @@ import Download from './components/Download'
 import { actionCreators } from './store/index'
 import { BackToTop } from './style'
 
+
 class Home extends PureComponent {
 
     componentDidMount() {

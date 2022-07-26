@@ -10,10 +10,12 @@ export default class App extends PureComponent {
   render() {
     return (
       <Provider store={store}>
-        <Header />
         <BrowserRouter>
-          <Route path="/" exact component={Home} />
-          <Route path="/detail" exact component={Detail} />
+          <div>
+            <Header />
+            <Route path="/" exact component={Home} />
+            <Route path="/detail/:id" exact component={Detail} />
+          </div>
         </BrowserRouter>
       </Provider>
     );
